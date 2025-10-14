@@ -4,6 +4,8 @@
 
 **GVPO (Group Variance Policy Optimization)** addresses the training instability issues of GRPO while providing stronger theoretical guarantees. The key innovation is incorporating the **analytical solution to KL-constrained reward maximization directly into gradient weights** through a clever **zero-sum weight constraint** that eliminates the intractable partition function.
 
+Originla paper: https://arxiv.org/pdf/2504.19599
+
 ---
 
 ## 1. Core Novelties of GVPO
