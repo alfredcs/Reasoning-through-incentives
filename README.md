@@ -39,17 +39,17 @@ The weight is the **difference between actual reward central distance and implic
 
 The paper elegantly shows GVPO's loss has three mathematically equivalent forms:
 
-#### **(a) Negative Log-Likelihood View (Equation 9):**
+#### **(a) Negative Log-Likelihood View :**
 
 $$\mathcal{L}_{\text{GVPO}}(\theta) = -\beta\sum_{x,\{y_i\}} \sum_{i=1}^k \left[(R(x,y_i) - \bar{R}) - \beta\left(\log\frac{\pi_\theta(y_i|x)}{\pi_{\theta'}(y_i|x)} - \overline{\log\frac{\pi_\theta}{\pi_{\theta'}}}\right)\right] \log \pi_\theta(y_i|x)$$
 
-#### **(b) Mean Squared Error View (Middle panel, Figure 1):**
+#### **(b) Mean Squared Error View :**
 
 $$\nabla_\theta \mathcal{L}_{\text{GVPO}} = \frac{1}{2}\nabla_\theta \sum_{x,\{y_i\}} \sum_{i=1}^k \left[(R_\theta(x,y_i) - \bar{R}_\theta) - (R(x,y_i) - \bar{R})\right]^2$$
 
 **Key Insight:** Minimizing GVPO loss = minimizing **MSE between implicit and actual reward central distances**.
 
-#### **(c) Reinforcement Learning View (Equation 14, β=1):**
+#### **(c) Reinforcement Learning View (β=1):**
 
 $$\nabla_\theta \hat{\mathcal{L}}_{\text{GVPO}} = -2\mathbb{E}_{x,y}\left[(R(x,y) - \mathbb{E}_y R) \log \pi_\theta(y|x) + \text{Cov}(\log \pi_\theta, \log \pi_{\theta'}) - 0.5\text{Var}(\log \pi_\theta)\right]$$
 
@@ -88,9 +88,10 @@ GVPO **removes std normalization** but adds the $\beta(\log\pi_\theta/\pi_{\thet
 
 ## 3. Theoretical Advantages of GVPO
 
-### **Advantage 1: Unique Optimal Solution (Theorem 3.1)**
+### **Advantage 1: Unique Optimal Solution **
 
 **GVPO Guarantee:**
+
 $$\text{argmin}_\theta \hat{\mathcal{L}}_{\text{GVPO}}(\theta) = \pi^*(y|x) = \frac{1}{Z(x)}\pi_{\theta'}(y|x)e^{R(x,y)/\beta}$$
 
 **Uniqueness** is proven by showing:
@@ -101,7 +102,7 @@ $$\text{argmin}_\theta \hat{\mathcal{L}}_{\text{GVPO}}(\theta) = \pi^*(y|x) = \f
 - **DPO fails this**: Due to Bradley-Terry model limitations [3, 11], DPO may converge to suboptimal policies
 - **GRPO lacks this**: No theoretical guarantee of convergence to KL-constrained optimum
 
-### **Advantage 2: Flexible Sampling Distributions (Corollary 3.2)**
+### **Advantage 2: Flexible Sampling Distributions **
 
 **GVPO's Condition:**
 Theorem 3.1 holds for **any sampling distribution $\pi_s$** satisfying:
@@ -135,7 +136,7 @@ $$\mathbb{E}_{x,y\sim\pi_s}\left[\left(R - \log\frac{\pi_\theta}{\pi_{\theta'}} 
 
 **No importance sampling ratio** appears in the gradient!
 
-### **Advantage 3: Unbiased and Consistent Estimator (Theorem 3.4)**
+### **Advantage 3: Unbiased and Consistent Estimator **
 
 The empirical loss with finite samples is:
 
@@ -182,7 +183,7 @@ loss = -beta * scores * advs / (k-1)  # Note: k-1 for unbiased estimator
 
 ---
 
-## 5. Empirical Performance (Table 1)
+## 5. Empirical Performance 
 
 | Model | AIME2024 | AMC | MATH500 | Minerva | OlympiadBench |
 |-------|----------|-----|---------|---------|---------------|
